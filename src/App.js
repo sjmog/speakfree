@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Button from './Button.js'
+
+const headStops = ["a", "g", "n", "t", "z", "5"];
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pointer: ""
+    }
+  }
+
+  setHead = (head) => {
+    this.setState({ pointer: head })
+  };
+
   render() {
-    return (
+    const buttons = headStops.map((head) => {
+      return <Button key={head} head={head} onClick={this.setHead} />
+    });
+    const display = <div className="Display">{this.state.pointer}</div>
+
+    return(
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {buttons}
+        {display}
       </div>
     );
   }
